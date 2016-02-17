@@ -50,6 +50,8 @@ app.controller('profileCtrl', function($scope, fbAuth, Profile) {
 
 app.controller('chatsCtrl', function($scope, $state, Auth, List, fbAuth) {
   
+  $scope.list = List;
+
   $scope.postChat = function() {    
     console.log('inside post chat');
     fbAuth.$onAuth(function(authData) {
@@ -60,7 +62,7 @@ app.controller('chatsCtrl', function($scope, $state, Auth, List, fbAuth) {
            email:$scope.authData.password.email,
          message:$scope.chatMessage 
         };
-        $scope.list = List;
+        
         $scope.list.$add(chatMessageObject);
       }
     });
@@ -77,7 +79,6 @@ app.controller('navCtrl', function($scope, $state, Auth, fbAuth) {
     Auth.logout();
     $state.go('home');
   };
-
 });
 
 app.controller('userCtrl', function($scope, $state, Auth, Profile, fbAuth, User) {
