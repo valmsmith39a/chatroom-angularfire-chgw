@@ -6,7 +6,7 @@ app.constant('fbUrl', 'https://angularfire-test-chg.firebaseio.com/');
 
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('home', { url: '/', templateUrl: '/html/home.html' })
+    .state('home', { url: '/', templateUrl: 'html/home.html' })
     
     .state('user', { url: '/user', template: '<ui-view/>', abstract: true })
     .state('user.login', { url: '/login', templateUrl: 'html/user.html', controller: 'userCtrl' })
