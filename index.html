@@ -16,10 +16,16 @@
 <body ng-app='fireApp'>
   <h1>AngularFire</h1>
   
-  <div>
-    <button ui-sref='home'>home</button>
-    <button ui-sref='user.login'>user.login</button>
-    <button ui-sref='user.register'>user.register</button>
+  <div ng-controller='navCtrl'>
+    <button ui-sref='home'>Home</button>
+    <button ng-disabled='authData' ui-sref='user.login'>Login</button>
+    <button ng-disabled='authData' ui-sref='user.register'>Register</button>
+    <span ng-show='authData'>
+      Welcome {{authData.password.email}}!
+    </span>
+    
+    <button ng-disabled='!authData' ui-sref='user.profile'>Profile</button>
+    <button ng-disabled='!authData' ng-click='logout()'>Logout</button>
   </div>
 
   <ui-view></ui-view>

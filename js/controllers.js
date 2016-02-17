@@ -15,14 +15,57 @@ app.controller('mainCtrl', function($scope, List, User) {
   };
 });
 
-app.controller('userCtrl', function($scope, $state) {
+app.controller('profileCtrl', function() {
+  console.log('profileCtrl');
+});
+
+
+app.controller('navCtrl', function($scope, $state, Auth, fbAuth) {
+  fbAuth.$onAuth(function(authData) {
+    console.log('authData:', authData);
+    $scope.authData = authData;
+  });
+
+  $scope.logout = function() {
+    Auth.logout();
+    $state.go('home');
+  };
+
+});
+
+
+
+app.controller('userCtrl', function($scope, $state, Auth) {
   $scope.state = $state.current.name.split('.')[1];
 
-  console.log('userCtrl');
-  console.log('$state.current:', $state.current);
-
   $scope.submit = function() {
-    console.log($scope.user);
+    if ($scope.state === 'login') {
+      Auth.login($scope.user)
+      .then(function() {
+        $state.go('home');
+      }, function() {
+        $scope.user.password = '';
+        alert('Invalid email or password.');
+      });
+    } else {
+      if($scope.user.password !== $scope.user.password2) {
+        $scope.user.password = $scope.user.password2 = '';
+        return alert('Passwords must match');
+      }
+
+      Auth.register({
+        email: $scope.user.email,
+        password: $scope.user.password
+      })
+      .then(function(authData) {
+        console.log('authData:', authData);
+        $state.go('home');
+      }, function(err) {
+        alert('error in console');
+        console.error(err);
+      });
+    }
   };
 });
+
 

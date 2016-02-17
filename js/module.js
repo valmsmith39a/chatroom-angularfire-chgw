@@ -12,6 +12,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('user.login', { url: '/login', templateUrl: '/html/user.html', controller: 'userCtrl' })
     .state('user.register', { url: '/register', templateUrl: '/html/user.html', controller: 'userCtrl' })
 
+    .state('user.profile', { url: '/profile', templateUrl: '/html/profile.html', controller: 'profileCtrl',
+          onEnter: function($state, fbAuth) {
+            console.log('getauth:', fbAuth.$getAuth());
+            // if(!fbAuth.$getAuth()){
+            //   return $state.go('home');
+            // }
+          }})
+
   $urlRouterProvider.otherwise('/');
 });
 
