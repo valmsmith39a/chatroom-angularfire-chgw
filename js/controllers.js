@@ -17,6 +17,21 @@ app.controller('mainCtrl', function($scope, List, User) {
 
 app.controller('profileCtrl', function($scope, fbAuth, Profile) {
   console.log('profileCtrl');
+  
+  fbAuth.$onAuth(function(authData) {
+      if(authData) {
+        $scope.authData = authData;        
+        $scope.profileDB =  Profile($scope.authData.uid);
+        
+        $scope.profileDB.$loaded(function(data) {
+          $scope.userObj = {};
+          $scope.userObj.name = data.name;
+          $scope.userObj.music = data.music;
+          $scope.userObj.hobbies = data.hobbies;
+        });
+      }      
+  });
+
   $scope.saveProfile = function() { 
 
     fbAuth.$onAuth(function(authData) {
