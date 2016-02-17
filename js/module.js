@@ -2,7 +2,7 @@
 
 var app = angular.module('fireApp', ['firebase', 'ui.router']);
 
-app.constant('fbUrl', 'https://cadetest.firebaseio.com/');
+app.constant('fbUrl', 'https://angularfire-test-chg.firebaseio.com/');
 
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

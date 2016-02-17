@@ -25,6 +25,7 @@ app.service('Auth', function(fbAuth) {
     return fbAuth.$createUser(userObj)
     .then(userData => {
       console.log("User " + userData.uid + " created successfully!");
+      
       return this.login(userObj);
     });
   };
