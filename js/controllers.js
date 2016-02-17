@@ -56,11 +56,18 @@ app.controller('chatsCtrl', function($scope, $state, Auth, List, fbAuth) {
     console.log('inside post chat');
     fbAuth.$onAuth(function(authData) {
       $scope.authData = authData;
+      var d = new Date();
+      var day = d.getDate();
+      var month = d.getMonth() + 1;
+      var year = d.getFullYear();
+      var timeStamp = month + '/' + day +'/' + year; 
+      
       if(authData) {
          var chatMessageObject = {
           userId:$scope.authData.uid,
            email:$scope.authData.password.email,
-         message:$scope.chatMessage 
+         message:$scope.chatMessage,
+       timeStamp:timeStamp
         };
         
         $scope.list.$add(chatMessageObject);

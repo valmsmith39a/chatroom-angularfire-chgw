@@ -31,3 +31,6 @@ extra code
         email:authData.password.email
         });
         */
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
