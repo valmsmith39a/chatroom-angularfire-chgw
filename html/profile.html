@@ -1,1 +1,17 @@
-<h1>Profile</h1>
+<h1>My PROFILE</h1>
+<table ng-controller="profileCtrl">
+  Name:
+  <input ng-model="userObj.name" type="text" placeholder={{userObj.name}}>
+  <br>
+  <br>
+  Music:
+  <input ng-model="userObj.music" type="text" placeholder={{userObj.music}}>
+  <br>
+  <br>
+  Hobbies:
+  <input ng-model="userObj.hobbies" type="text" placeholder={{userObj.hobbies}}>
+  <br>
+  <br>
+  <button ng-click=saveProfile()>Save Edits</button>
+</table>
+

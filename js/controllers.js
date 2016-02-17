@@ -17,13 +17,20 @@ app.controller('mainCtrl', function($scope, List, User) {
 
 app.controller('profileCtrl', function($scope, fbAuth, Profile) {
   console.log('profileCtrl');
-  fbAuth.$onAuth(function(authData) {
-    $scope.authData = authData;
-    $scope.user =  Profile($scope.authData.uid)
-    $scope.user.email = authData.password.email;
+  $scope.saveProfile = function() { 
 
-    $scope.user.$save();
-  });
+    fbAuth.$onAuth(function(authData) {
+      $scope.authData = authData;
+      $scope.profileDB =  Profile($scope.authData.uid);
+
+      $scope.profileDB.name = $scope.userObj.name;
+      $scope.profileDB.music = $scope.userObj.music;
+      $scope.profileDB.hobbies = $scope.userObj.hobbies;
+
+      console.log('scope.profileDB is: ', $scope.profileDB);
+      $scope.profileDB.$save();
+    });
+  };
 });
 
 app.controller('navCtrl', function($scope, $state, Auth, fbAuth) {
