@@ -1,0 +1,13 @@
+<h1>CHATS</h1>
+<div>
+  Post a message! 
+  <input ng-model="chatMessage" type="text">
+  <button ng-click=postChat()>POST</button>
+</div>
+ <ul>
+  <li ng-repeat="chat in list">
+    message: {{chat.message}}
+    <br>
+    from: {{chat.email}}
+  </li>
+</ul> 

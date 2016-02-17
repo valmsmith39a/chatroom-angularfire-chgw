@@ -1,0 +1,33 @@
+extra code 
+
+// Get User reference
+        // Create user profile in FB
+
+        //var userObject = User;
+        //$scope.user = userObject;
+
+        //var userFirebaseId = authData.uid;
+
+        //console.log('this is the user firebase id ', userFirebaseId);
+
+        //var userObject = Profile(userFirebaseId);
+
+        //console.log('This is user object', userObject);
+
+
+        //$scope.user = User;
+
+        var userFirebaseId = authData.uid;
+
+        console.log('user firebase id is: ', userFirebaseId);
+
+        $scope.user = Profile(userFirebaseId);
+        console.log('scope.user is: ', $scope.user);
+        $scope.user.$save();
+
+        /*
+        $scope.user.$save({
+          uid:authData.uid,
+        email:authData.password.email
+        });
+        */

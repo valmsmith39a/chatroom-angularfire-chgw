@@ -11,7 +11,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('user', { url: '/user', template: '<ui-view/>', abstract: true })
     .state('user.login', { url: '/login', templateUrl: '/html/user.html', controller: 'userCtrl' })
     .state('user.register', { url: '/register', templateUrl: '/html/user.html', controller: 'userCtrl' })
-
+    .state('chats', { url: '/chats', templateUrl: '/html/chats.html', controller: 'chatsCtrl' })
     .state('user.profile', { url: '/profile', templateUrl: '/html/profile.html', controller: 'profileCtrl',
           onEnter: function($state, fbAuth) {
             console.log('getauth:', fbAuth.$getAuth());

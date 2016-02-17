@@ -48,6 +48,25 @@ app.controller('profileCtrl', function($scope, fbAuth, Profile) {
   };
 });
 
+app.controller('chatsCtrl', function($scope, $state, Auth, List, fbAuth) {
+  
+  $scope.postChat = function() {    
+    console.log('inside post chat');
+    fbAuth.$onAuth(function(authData) {
+      $scope.authData = authData;
+      if(authData) {
+         var chatMessageObject = {
+          userId:$scope.authData.uid,
+           email:$scope.authData.password.email,
+         message:$scope.chatMessage 
+        };
+        $scope.list = List;
+        $scope.list.$add(chatMessageObject);
+      }
+    });
+  };
+});
+
 app.controller('navCtrl', function($scope, $state, Auth, fbAuth) {
   fbAuth.$onAuth(function(authData) {
     console.log('authData:', authData);
@@ -60,8 +79,6 @@ app.controller('navCtrl', function($scope, $state, Auth, fbAuth) {
   };
 
 });
-
-
 
 app.controller('userCtrl', function($scope, $state, Auth, Profile, fbAuth, User) {
   $scope.state = $state.current.name.split('.')[1];
@@ -87,49 +104,6 @@ app.controller('userCtrl', function($scope, $state, Auth, Profile, fbAuth, User)
       })
       .then(function(authData) {
         console.log('authData:', authData);
-
-        // Get User reference
-        // Create user profile in FB
-
-        //var userObject = User;
-        //$scope.user = userObject;
-
-        //var userFirebaseId = authData.uid;
-
-        //console.log('this is the user firebase id ', userFirebaseId);
-
-        //var userObject = Profile(userFirebaseId);
-
-        //console.log('This is user object', userObject);
-
-
-        //$scope.user = User;
-
-        var userFirebaseId = authData.uid;
-
-        console.log('user firebase id is: ', userFirebaseId);
-
-        $scope.user = Profile(userFirebaseId);
-        console.log('scope.user is: ', $scope.user);
-        $scope.user.$save();
-
-        /*
-        $scope.user.$save({
-          uid:authData.uid,
-        email:authData.password.email
-        });
-        */
-
-
-
-
-
-
-
-
-
-
-
         $state.go('home');
       }, function(err) {
         alert('error in console');
