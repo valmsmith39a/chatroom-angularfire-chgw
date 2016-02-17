@@ -20,6 +20,19 @@ app.factory('fbAuth', function(fbRef, $firebaseAuth) {
   return $firebaseAuth(fbRef);
 });
 
+app.factory("Profile", function($firebaseObject, fbRef) {
+  var User = $firebaseObject.$extend({
+    getFullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  });
+
+  return function(userId) {
+    var ref = fbRef.child('profiles').child(userId);
+    return new User(ref);
+  }
+});
+
 app.service('Auth', function(fbAuth) {
   this.register = function(userObj) {
     return fbAuth.$createUser(userObj)
